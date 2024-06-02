@@ -11,7 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: ["18.x", "20.x"]
+        node-version: ["18.x"]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     services:
@@ -20,7 +20,7 @@ jobs:
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: Firdie13122001-
-          POSTGRES_DB: forumapi
+          POSTGRES_DB: authapi
 
         options: >-
           --health-cmd pg_isready
@@ -40,7 +40,7 @@ jobs:
         run: |
           npm install
           npm run migrate up
-          npm run test
+          npm run test -- -i
         env:
           CI: true
           HOST: 0.0.0.0
@@ -49,7 +49,7 @@ jobs:
           PGPORT: 5432
           PGUSER: postgres
           PGPASSWORD: Firdie13122001-
-          PGDATABASE: forumapi
+          PGDATABASE: authapi
           ACCESS_TOKEN_KEY: secret
           REFRESH_TOKEN_KEY: terces
           ACCESS_TOKEN_AGE: 3600
